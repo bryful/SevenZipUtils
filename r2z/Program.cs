@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Runtime.InteropServices;
 using System;
-using r2z;
+using FsSevenZip;
 
 internal partial class Program
 {

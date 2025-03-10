@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenZipUtils", "SevenZipUtils\SevenZipUtils.csproj", "{4867210A-FC19-4274-99AC-804F50FD4A39}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "args", "args\args.csproj", "{46979F3D-4ADC-4B41-B0F9-BAA734706456}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "d2z", "d2z\d2z.csproj", "{B8E21326-00A7-4788-BE7E-4A02A59FA489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test7z", "Test7z\Test7z.csproj", "{6E871339-2C19-44BF-B9C7-A90217D76E38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B8E21326-00A7-4788-BE7E-4A02A59FA489}.Debug|x64.Build.0 = Debug|Any CPU
 		{B8E21326-00A7-4788-BE7E-4A02A59FA489}.Release|x64.ActiveCfg = Release|Any CPU
 		{B8E21326-00A7-4788-BE7E-4A02A59FA489}.Release|x64.Build.0 = Release|Any CPU
+		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Debug|x64.Build.0 = Debug|Any CPU
+		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

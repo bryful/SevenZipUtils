@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 
-namespace r2z
+namespace FsSevenZip
 {
     public class SevenZipUtils
     {
-		private static string _7zPath = @"C:\\Program Files\\7-Zip\\7z.exe";
+		private static string sevenZipPath = @"C:\\Program Files\\7-Zip\\7z.exe";
 		public static bool Enabled 
 		{
-			get { return File.Exists(_7zPath); }
+			get { return File.Exists(sevenZipPath); }
 		}
 		public static bool RarToZip(string p)
 		{
@@ -28,7 +28,7 @@ namespace r2z
 
 			ProcessStartInfo extractProcess = new ProcessStartInfo
 			{
-				FileName = _7zPath,
+				FileName = sevenZipPath,
 				Arguments = $"x \"{p}\" -o\"{tempExtractFolder}\" -y",
 				//RedirectStandardOutput = true,
 				UseShellExecute = false,
@@ -44,7 +44,7 @@ namespace r2z
 			string outputZipFile = fi.FullName.Replace(fi.Extension, ".zip");
 			ProcessStartInfo compressProcess = new ProcessStartInfo
 			{
-				FileName = _7zPath,
+				FileName = sevenZipPath,
 				Arguments = $"a -tzip \"{outputZipFile}\" \"{tempExtractFolder}\\*\"",
 				//RedirectStandardOutput = true,
 				UseShellExecute = false,
@@ -73,8 +73,8 @@ namespace r2z
 
 			ProcessStartInfo extractProcess = new ProcessStartInfo
 			{
-				FileName = _7zPath,
-				Arguments = $"a  \"{zipFileName}\" \"{di.FullName}\\\"",
+				FileName = sevenZipPath,
+				Arguments = $"a  \"{zipFileName}\" \"{di.FullName}\\*\"",
 				//RedirectStandardOutput = true,
 				UseShellExecute = false,
 				//CreateNoWindow = true
@@ -89,13 +89,121 @@ namespace r2z
 			return ret;
 
 		}
+		public static bool Init(string p)
+		{
+			bool ret = false;
+			sevenZipPath = p;
+			if (File.Exists(sevenZipPath) == false)
+			{
+				sevenZipPath = @"7z.exe";
+				if (File.Exists(sevenZipPath) == false)
+				{
+					sevenZipPath = @"C:\\Program Files\\7-Zip\\7z.exe";
+
+				}
+				if (File.Exists(sevenZipPath) == false)
+				{
+					sevenZipPath = @"";
+
+				}
+			}
+			ret= File.Exists(sevenZipPath);
+			return ret;
+		}
 		public SevenZipUtils(string path="")
 		{
-			if (path != "")
+			Init(path);
+		}
+
+
+		public static string[] Listup(string archiveFile)
+		{
+			FileInfo fi = new FileInfo(archiveFile);	
+			if (fi.Exists==false)
 			{
-				_7zPath = path;
+				return new string[0];
+			}
+			List<string> fileList = new List<string>();
+			ProcessStartInfo processInfo = new ProcessStartInfo
+			{
+				FileName = sevenZipPath,
+				Arguments = $"l \"{archiveFile}\"",
+				//RedirectStandardOutput = true,
+				UseShellExecute = false,
+				//CreateNoWindow = true
+			};
+			using (Process? process = Process.Start(processInfo))
+			{
+				if (process != null)
+				{
+					while (!process.StandardOutput.EndOfStream)
+					{
+						string? line = process.StandardOutput.ReadLine();
+						if (!string.IsNullOrWhiteSpace(line) && line.Contains(".") && !line.StartsWith("----"))
+						{
+							fileList.Add(line.Trim());
+						}
+					}
+					process.WaitForExit();
+				}
 			}
 
+			return fileList.ToArray();
+		}
+		public static bool ExtractZip(string zipFilePath, string outputFolder)
+		{
+			bool ret = false;
+			if (!File.Exists(zipFilePath))
+			{
+				return ret;
+			}
+
+			Directory.CreateDirectory(outputFolder);
+			ProcessStartInfo processInfo = new ProcessStartInfo
+			{
+				FileName = sevenZipPath,
+				Arguments = $"x \"{zipFilePath}\" -o\"{outputFolder}\" -y",
+				RedirectStandardOutput = true,
+				UseShellExecute = false,
+				CreateNoWindow = true
+			};
+
+			using (Process? process = Process.Start(processInfo))
+			{
+				if(process != null)
+				{
+					process.WaitForExit();
+					ret = true;
+				}	
+			}
+			return ret;
+		}
+		public static bool CompressZipFromFolder(string outputZipFile, string targetFolder)
+		{
+			bool ret = false;
+			if (!Directory.Exists(targetFolder))
+			{
+				return ret;
+			}
+
+			ProcessStartInfo processInfo = new ProcessStartInfo
+			{
+				FileName = sevenZipPath,
+				Arguments = $"a -tzip \"{outputZipFile}\" \"{targetFolder}\\*\"",
+				//RedirectStandardOutput = true,
+				UseShellExecute = false,
+				//CreateNoWindow = true
+			};
+
+			using (Process? process = Process.Start(processInfo))
+			{
+				if (process != null)
+				{
+					process.WaitForExit();
+					ret = true;
+				}
+			}
+			return ret;
 		}
 
 	}

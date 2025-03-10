@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Test7z": {
+      "commandName": "Project",
+      "commandLineArgs": "bar.zip"
+    }
+  }
+}
