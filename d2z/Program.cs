@@ -26,6 +26,7 @@ internal partial class Program
 		{
 			SevenZipUtils.DirToZip(arg);
 		}
+		ret = 0;
 		return ret;
 	}
 }

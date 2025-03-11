@@ -15,13 +15,15 @@ internal partial class Program
 			Console.WriteLine("no prams");
 			return 1;
 		}
-		string[] list = SevenZipUtils.Listup(args[0]);
+		ArcInfo[] list = SevenZipUtils.Listup(args[0]);
 
-		foreach (string file in list)
+		int rc = 0;
+		foreach (ArcInfo file in list)
 		{
-			Console.WriteLine(file);
+			Console.WriteLine(file.Json());
+			if (file.IsRootDir) rc++;
 		}
-
+		Console.WriteLine("RootDirCount:" + rc);
 		return 0;
 	}
 }

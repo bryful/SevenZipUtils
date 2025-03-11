@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "d2z", "d2z\d2z.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test7z", "Test7z\Test7z.csproj", "{6E871339-2C19-44BF-B9C7-A90217D76E38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a2d", "a2d\a2d.csproj", "{8AFD538D-6C0B-43EB-B7CF-A64C71DEF591}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -39,6 +41,10 @@ Global
 		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Debug|x64.Build.0 = Debug|Any CPU
 		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Release|x64.ActiveCfg = Release|Any CPU
 		{6E871339-2C19-44BF-B9C7-A90217D76E38}.Release|x64.Build.0 = Release|Any CPU
+		{8AFD538D-6C0B-43EB-B7CF-A64C71DEF591}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8AFD538D-6C0B-43EB-B7CF-A64C71DEF591}.Debug|x64.Build.0 = Debug|Any CPU
+		{8AFD538D-6C0B-43EB-B7CF-A64C71DEF591}.Release|x64.ActiveCfg = Release|Any CPU
+		{8AFD538D-6C0B-43EB-B7CF-A64C71DEF591}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

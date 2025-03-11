@@ -22,14 +22,9 @@ internal partial class Program
 			Console.WriteLine("no prams");
 			return ret;
 		}
-
-
 		foreach (string arg in args)
 		{
-			if (File.Exists(arg))
-			{
-				SevenZipUtils.RarToZip(arg);
-			}
+			SevenZipUtils.ArcToDir(arg);
 		}
 		ret = 0;
 		return ret;
