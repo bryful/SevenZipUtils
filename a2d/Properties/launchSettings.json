@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "a2d": {
+      "commandName": "Project",
+      "commandLineArgs": "\"[100円ロッカー] しこってぃ.zip\""
+    }
+  }
+}

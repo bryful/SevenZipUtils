@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace FsSevenZip
 {
     public class SevenZipUtils
     {
+		[DllImport("user32.dll", CharSet = CharSet.Unicode)]
+		static extern int MessageBoxW(nint hWnd, [MarshalAs(UnmanagedType.LPWStr)] string lpText, [MarshalAs(UnmanagedType.LPWStr)] string lpCaption, uint uType);
+
+
 		private static string sevenZipPath = @"C:\\Program Files\\7-Zip\\7z.exe";
 		public static bool Enabled 
 		{
@@ -118,15 +123,19 @@ namespace FsSevenZip
 				if (file.IsRootDir) rc++;
 				if(file.IsDir==false) fc++;
 			}
-			string? tmpDir = Path.ChangeExtension(fi.FullName, "");
-			if ((rc==1)&&(fc==0))
+			string? tmpDir = Path.Combine(Path.GetDirectoryName(fi.FullName), Path.GetFileNameWithoutExtension(fi.FullName)); ;
+			
+			if (((rc==1)&&(fc==0))||((rc==0)&&(fc>0)))
 			{
 				tmpDir = Path.GetDirectoryName(tmpDir);
 			}
+			//MessageBoxW((nint)0, tmpDir, "tmpDir", 0);
+			/*
 			if(Directory.Exists(tmpDir))
 			{
 				Directory.Delete(tmpDir, true);
-			}	
+			}
+			*/
 			ProcessStartInfo extractProcess = new ProcessStartInfo
 			{
 				FileName = sevenZipPath,
